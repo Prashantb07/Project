@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Login Success</title>
 </head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style media="screen">
 * {
 	margin: 0;
@@ -167,23 +167,25 @@ footer {
 			<img height="50px"
 				src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
 		</div>
-		<a href="parkingInfo.jsp"><button type="button"
-				class="btn btn-primary button">Home</button></a> <a href="sign.jsp"><button
-				type="button" class="btn btn-primary button">LogOut</button></a>
-
+		<div class="nav navbar-nav navbar-right">
+			<div style="position:absolute; margin-left:190vh">
+				<a href="userlogin.jsp">
+					<button type="button" class="btn btn-primary button">LogOut</button>
+				</a>
+			</div>
+			<p class="navbar-text"
+				style="color: white; font-size: 20px; font-family: serif;">User:
+				${userDto.userName}</p>
+		</div>
 	</nav>
+	
+	<div class="park">
+			<a href="userParkinginfo.jsp"><button type="button" class="btn btn-light">Parking Info</button></a>
+			<a href="fetchdata"><button type="button" class="btn btn-light">View</button></a>
+		</div>
+	
 
-	<div align="center">
-		<span style="color: green;">${sucessMsg}</span>
 
-		<h2>Submitted</h2>
-
-		Location:${dtos.location}<br> Vehicle Type:${dtos.vtype}<br>
-		Vehicle Classification :${dtos.vclassification}<br>
-		Terms:${dtos.term}<br> Price:${dtos.price}<br>
-		Discount:${dtos.discount}<br>
-
-	</div>
 	<footer>
 		<!-- <div class="footer-content">
 			<h4 class="">X-Workz(ODC)</h4>
@@ -197,18 +199,11 @@ footer {
 		</div> -->
 		<div class="footer-bottom">
 
-			<div class="footer-bottom">
-
 			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
+			<p></p>
 		
-		</div>
-
 
 		</div>
-
 	</footer>
-
-
-
 </body>
 </html>

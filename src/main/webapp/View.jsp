@@ -179,14 +179,14 @@
                 src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
             <div class="buttons">
                 <a href="parkinginfo.jsp">
-                    <button type="button" class="btn btn-primary button home">Home</button>
+                    <button type="button" class="btn btn-primary button ">Home</button>
                 </a>
-                <a href="sign.jsp"><button type="button" class="btn btn-primary button">LogOut</button></a>
-            </div>
+<!--                 <a href="sign.jsp"><button type="button" class="btn btn-primary button">LogOut</button></a>
+ -->            </div>
         </div>
     </nav>
 
-    <h3>List of location</h3>
+    <h3>Search Location</h3>
     <h2 align="center"></h2>
     <form action="search" method="get">
         Location:<select name="location" name="name"><br>
@@ -208,6 +208,9 @@
             <th>term</th>
             <th>price</th>
             <th>discount</th>
+			<!-- <th>totalAmount<th>
+            <th>Image</th>
+            <th>Action</th> -->
         </tr>
 
         <c:forEach items="${list}" var="dto">
@@ -219,7 +222,7 @@
                 <td>${dto.term}</td>
                 <td>${dto.price}</td>
                 <th>${dto.discount}</th>
-
+             	
             </tr>
         </c:forEach>
 
@@ -239,12 +242,11 @@
 
         <div class="footer-bottom">
 
-            <p>
-                copyright &copy; <a href="#"> Developer</a>
-            <p>last_login_time: ${dto.loginTime}</p>
+			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
+			
+		
 
-
-        </div>
+		</div>
 
     </footer>
 

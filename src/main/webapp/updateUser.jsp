@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="ISO-8859-1"%>
+    	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Information</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<title>Update User</title>
 </head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style media="screen">
 * {
@@ -159,63 +159,67 @@ footer {
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
+
+.container{
+	max-width: 900px;
+	margin: auto;
+	height:650px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;	
+	
+}
 }
 </style>
-<nav class="navbar navbar-expand-lg navabar-primary bg-dark"
-	style="background-color: black;">
-
-	<div class="container-fluid">
-		<span><img height="50px"
-			src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais"></span>
-
-		<ul>
-		 	<a  type="submit"  href="parkinginfo.jsp " class="btn btn-primary ">Home</a>
-					<a type="submit" href="sign.jsp" class="btn btn-primary" >LogOut</a> 	
-					<a 	style="margin-right: 10px; color: white;"> Admin,${dto.adminName}</a>
-		</ul>
-			  
-
-	</div>
-</nav>
-
 <body>
 
-	<c:forEach items="${error}" var="errors">
-		<span style="color: red;">${errors.defaultMessage}</span>
+				
+				<div class="nav navbar-nav navbar-right">
+  			<a href="userlogin.jsp"><button type="button" class="btn btn-light">LogOut</button></a>
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${userDto.userName}</p>
+  		</div>
+  		
+  		<h3 align="center">User Parking Information Form</h3>
+  		
+  		<div class="container">
+<div class="card border-0 shadow">
+<div class="card card-body"> 
 
-	</c:forEach>
-
-	<span style="color: green;">${sucessMsg}</span>
-
-	<h2 align="center">-:Parking Info:-</h2>
-
-	<form action="savePI" method="post">
-
-		Location:<select name="location" name="name"><br>
-			<option value="0">Select</option>
-			<br>
-
-			<option>Rajajinagar</option>
-			<option>Vijaynagar</option>
-			<option>Shivajinagar</option>
-			<option>Basaweshwarnagar</option>
-			<option>kamalanagar</option>
-
-		</select>
-
+	<c:forEach items="${errors}" var="error">
+		<span style="color: red;">${error.defaultMessage}</span></br>
+	</c:forEach>  
+	
+	
+	<form action="${pageContext.request.contextPath}/updateuserpark" method="post" enctype="multipart/form-data">
+	
 		<div class="form-group">
-			Vehicle Type: <select name="vtype" class="form-control" required>
-				<option value="">---Select---</option>
+			<input type="text" value="${parkingid.getParkingId()}" name="parkingId" readonly="readonly"> 
+		</div>
+	
+	<div class="form-group">
+			<select name="location" class="form-control" id="location">
+				<option value="">${parkingid.getLocation()}</option>
+				<option>Rajajinagar</option>
+				<option>Vijaynagar</option>
+				<option>Shivajinagar</option>
+				<option>Basaweshwarnagar</option>
+				<option>kamalanagar</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<select name="vtype" class="form-control" id="vtype"  >
+				<option value="">${parkingid.getVtype()}</option>
 				<option>2 Wheeler</option>
 				<option>4 Wheeler</option>
 				<option>Ev</option>
 			</select>
 		</div>
-
+		
 		<div class="form-group">
-			Vehicle Classification: <select name="vclassification"
-				class="form-control" required>
-				<option value="">---Select---</option>
+			<select name="vclassification" class="form-control" id="vclassification" >
+				<option value="">${parkingid.getVclassification()}</option>
 				<option>Bike</option>
 				<option>Kia</option>
 				<option>Bmw</option>
@@ -230,30 +234,44 @@ footer {
 				<option>Skoda</option>
 			</select>
 		</div>
-		Term:<select name="term" name="name"><br>
-			<option value="0">Select</option>
-			<br>
-
-			<option>1 DAYS</option>
-			<option>7 DAYS</option>
-			<option>15 DAYS</option>
-			<option>30 DAYS</option>
-			<option>60 DAYS</option>
-			<option>90 DAYS</option>
-			<option>180 DAYS</option>
-			<option>365 DAYS</option>
-
-
-		</select> Price:<input type="number" name="price"> Discount:<input
-			type="number" name="discount">
-
-		<!-- 		<button type="submit" class="btn btn-primary button">ParkingInfo</button>
- -->
-		<input type="submit" value="Save">
-
+		
+		<div class="form-group">
+			<select name="term" class="form-control" id="terms" onchange="findPrice()" >
+				<option value="">${parkingid.getTerm()}</option>
+				<option>1 Day</option>
+				<option>7 Days</option>
+				<option>15 Days</option>
+				<option>30 Days</option>
+				<option>60 Days</option>
+				<option>90 Days</option>
+				<option>180 Days</option>
+				<option>365 Days</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			Price: <input type="number" name="price"  class="form-control" id="price" value="${parkingid.getPrice()}"readonly="readonly" >
+		</div>
+		
+		<div class="form-group">
+			Discount: <input type="number" name="discount" class="form-control" id="discount" value="${parkingid.getDiscount()}"readonly="readonly" >
+		</div>
+		
+		<div class="form-group">
+			Total Amount: <input type="number" name="totalAmount" class="form-control" id="totalAmount" value="${parkingid.getTotalAmount()}" readonly="readonly">
+		</div>
+		
+		<div >
+			Upload Vehicle Image <input type="file" name="file" id="fileName" class="form-control" value="<a target="_blank" href="fileDownload?fileName=${parkingid.getFileName()}&contentType=${parkingid.getContentType()}">${parkingid.getFileName()}</a>">
+		</div>
+		
+		<button type="submit" class="btn btn-primary">Save</button>
+		
 	</form>
-
-	<footer>
+	</div>
+</div>
+</div>	
+<footer>
 		<!-- <div class="footer-content">
 			<h4 class="">X-Workz(ODC)</h4>
 			<ul class="socials">
@@ -272,6 +290,5 @@ footer {
 		</div>
 
 	</footer>
-
 </body>
 </html>

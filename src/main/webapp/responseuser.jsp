@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-</head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style media="screen">
 * {
 	margin: 0;
@@ -160,31 +159,31 @@ footer {
 	}
 }
 </style>
+</head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark"
-		style="background-color: black;">
-		<div>
-			<img height="50px"
-				src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
-		</div>
-		<a href="parkingInfo.jsp"><button type="button"
-				class="btn btn-primary button">Home</button></a> <a href="sign.jsp"><button
-				type="button" class="btn btn-primary button">LogOut</button></a>
 
+	<nav class="navbar navbar-expand-sm bg-dark" style="background-color: black;">
+            <img height="50px"
+                src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
+            <div class="buttons">
+  			<a href="parkingInfo.jsp"><button type="button" class="btn btn-light">Home</button></a>
+  			  			<a href="userView.jsp"><button type="button" class="btn btn-light">View</button></a>
+  			
+  		</div>
+  		<div class="nav navbar-nav navbar-right">
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${dto.adminName}</p>
+  		</div>
 	</nav>
+	
+		<div align="center">
+			<span style="color: green;">${successMsg}</span>
 
-	<div align="center">
-		<span style="color: green;">${sucessMsg}</span>
-
-		<h2>Submitted</h2>
-
-		Location:${dtos.location}<br> Vehicle Type:${dtos.vtype}<br>
-		Vehicle Classification :${dtos.vclassification}<br>
-		Terms:${dtos.term}<br> Price:${dtos.price}<br>
-		Discount:${dtos.discount}<br>
-
-	</div>
-	<footer>
+			<h1>Submitted Response</h1>
+			
+			
+		</div>
+		
+		<footer>
 		<!-- <div class="footer-content">
 			<h4 class="">X-Workz(ODC)</h4>
 			<ul class="socials">
@@ -197,18 +196,11 @@ footer {
 		</div> -->
 		<div class="footer-bottom">
 
-			<div class="footer-bottom">
-
 			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
 		
-		</div>
-
 
 		</div>
 
 	</footer>
-
-
-
 </body>
 </html>

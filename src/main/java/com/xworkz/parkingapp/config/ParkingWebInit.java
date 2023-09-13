@@ -1,8 +1,11 @@
 package com.xworkz.parkingapp.config;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import lombok.extern.slf4j.Slf4j;
+import com.xworkz.parkingapp.constant.ApplicationConstant;
 
 public class ParkingWebInit extends AbstractAnnotationConfigDispatcherServletInitializer{
 
@@ -24,4 +27,11 @@ public class ParkingWebInit extends AbstractAnnotationConfigDispatcherServletIni
 		return new String[] {"/"};
 	}
 
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+
+		int maxSize=ApplicationConstant.MAX_FILE_SIZE;
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(ApplicationConstant.TEMP_FILE_LOCATION, maxSize, maxSize*2, maxSize/2);
+		registration.setMultipartConfig(multipartConfigElement);
+	}
 }

@@ -155,6 +155,7 @@ footer {
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
+	
 }
 </style>
 </head>
@@ -170,7 +171,7 @@ footer {
 				src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
 			<a href=sign.jsp><button type="submit"
 					class="btn btn-primary button">Admin</button></a>
-			<a href=userinfo.jsp><button type="submit" class="btn btn-primary button">User</button></a>
+			<a href=userlogin.jsp><button type="submit" class="btn btn-primary button">User</button></a>
 		</div>
 			
 		

@@ -11,6 +11,7 @@ import com.xworkz.parkingapp.repo.ParkingRepo;
 
 @Service
 public class ParkingServiceImpl implements ParkingService {
+
 	@Autowired
 	ParkingRepo repo;
 
@@ -30,7 +31,7 @@ public class ParkingServiceImpl implements ParkingService {
 
 			entity.setLoginTime(formateDate);
 			boolean status = repo.updateTime(entity);
-			//ParkingEntity entity2 = repo.userSingIn(email);
+			// ParkingEntity entity2 = repo.userSingIn(email);
 			ParkingDTO dto = new ParkingDTO();
 			BeanUtils.copyProperties(entity, dto);
 			return dto;

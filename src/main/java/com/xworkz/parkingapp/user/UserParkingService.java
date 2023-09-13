@@ -4,6 +4,6 @@ import javax.validation.Valid;
 
 public interface UserParkingService {
 
-	boolean validateAndSave(@Valid UserParkingDTO dto);
+//	boolean validateAndSave(@Valid UserParkingDTO dto);
 
 }

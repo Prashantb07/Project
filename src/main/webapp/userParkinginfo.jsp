@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User-info</title>
+<title>User Parking Information</title>
 </head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style media="screen">
 * {
 	margin: 0;
@@ -161,7 +162,51 @@ footer {
 	}
 }
 </style>
+
+<script>
+		function findPrice() {
+			var location = document.getElementById("location").value;
+			var vtype = document.getElementById("vtype").value;
+			var classification = document.getElementById("vclassification").value;
+			var term = document.getElementById("term").value;
+
+			const httpRequest = new XMLHttpRequest();
+			httpRequest.open("GET", "http://localhost:8080/parking-rental-system/userAjax/"+location + "/" + vtype + "/" + classification + "/" + term);
+			
+			httpRequest.send();
+
+			httpRequest.onload = function() {
+				console.log(this.responseText);
+				const obj=JSON.parse(this.responseText);
+				console.log(obj)
+				console.log(obj.price)
+				console.log(obj.discount)
+				console.log(obj.total)
+			    var pr=document.getElementById("price").value=obj.price;	
+				var dis=document.getElementById("discount").value=obj.discount;
+				var t = dis/100; /* we r getting value in float */
+				var d =pr*t; /* float value and actual value multiply */
+				var fi=pr-d; /* original price sub with discount we get total amount */
+				document.getElementById("total").value=fi;
+			}
+		}
+		
+		function terms_changed(check) {
+			if(check.checked) {
+				document.getElementById("submit_button").disable = false;
+			}
+			else{
+				document.getElementById("submit_button").disable = true;
+			}
+		}
+	</script>
+
+</head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <body>
+
 	<script>
 		function findPrice() {
 			var location = document.getElementById("location").value;
@@ -189,37 +234,44 @@ footer {
 				document.getElementById("total").value=fi;
 			}
 		}
+		
+		function terms_changed(check) {
+			if(check.checked) {
+				document.getElementById("submit_button").disable = false;
+			}
+			else{
+				document.getElementById("submit_button").disable = true;
+			}
+		}
 	</script>
-	<form action="userSave" method="post">
 
-		<div class="form-group">
-			<label for="exampleInputEmail1"></label> <input type="text"
-				name="userName" class="form-control" placeholder="Enter username"
-				required>
+	<nav class="navbar navbar-expand-sm bg-dark"
+		style="background-color: black;">
+		<div>
+			<img height="50px"
+				src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
 		</div>
 
-		<!-- <div class="form-group">
-			<label for="exampleInputEmail1"></label> <input type="number"
-				name="parkingId" class="form-control" placeholder="Enter parkingId"
-				required>
+		<div class="nav navbar-nav navbar-right">
+			<div style="position: absolute; margin-left: 190vh">
+				<a href="userlogin.jsp"><button type="button"
+						class="btn btn-primary button">LogOut</button></a>
+			</div>
+			<p class="navbar-text"
+				style="color: white; font-size: 20px; font-family: serif;">User:
+				${userDto.userName}</p>
 		</div>
-		<div class="form-group">
-			<label for="exampleInputPassword1"></label> <input type="number"
-				name="userId" class="form-control" id="exampleInputEmail"
-				placeholder="Enter userId" required>
-		</div> -->
+	</nav>
+	<h3 align="center">User Parking Information Form</h3>
 
-		<div class="form-group">
-			<label for="exampleInputEmail1"></label> <input type="email"
-				name="userEmail" class="form-control" placeholder="Enter email"
-				required>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputPassword1"></label> <input type="number"
-				name="userMobileNo" class="form-control"
-				placeholder="Enter mobile number" required>
-		</div>
-		<br>
+	<c:forEach items="${errors}" var="error">
+		<span style="color: red;">${error.defaultMessage}</span>
+		</br>
+	</c:forEach>
+
+
+	<form action="onSave" method="post" enctype="multipart/form-data">
+
 		Location:<select name="location" id="location"><br>
 			<option value="0">Select</option>
 			<br>
@@ -260,7 +312,7 @@ footer {
 				<option>Skoda</option>
 			</select>
 		</div>
-		Term:<select name="term" id="term" onchange="findPrice()"><br>
+		Term:<select name="term" id="term" onchange="findPrice()" required><br>
 			<option value="0">Select</option>
 			<br>
 
@@ -277,11 +329,18 @@ footer {
 		</select> Price:<input type="text" name="price" id="price" readonly="readonly">
 		Discount:<input type="text" name="discount" id="discount"
 			readonly="readonly"> Total Amount:<input type="number"
-			name="totalAmount" id="total" readonly="readonly"> <input
-			type="submit" value="Save">
+			name="totalAmount" id="total" readonly="readonly">
+		<div class="form-group">
+			Upload Vehicle Image <input type="file" name="file"
+				class="form-control" required="required">
+		</div>
+
+
+		<input type="checkbox" required>I Agree
+
+		<button type="submit" class="btn btn-primary">Save</button>
 
 	</form>
-
 
 	<footer>
 		<!-- <div class="footer-content">
@@ -296,10 +355,11 @@ footer {
 		</div> -->
 		<div class="footer-bottom">
 
-			<small>@ 2023 Copyright &copy; xworkz.com</small>
+			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
 		
 
 		</div>
 	</footer>
+
 </body>
 </html>

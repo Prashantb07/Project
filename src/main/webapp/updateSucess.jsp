@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+<title>Update Sucess</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link
+	<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	
 <style media="screen">
 * {
 	margin: 0;
@@ -158,33 +157,72 @@ footer {
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
+	
 }
 </style>
+</head>
+
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark"
+<nav class="navbar navbar-expand-sm bg-dark"
 		style="background-color: black;">
 		<div>
 			<img height="50px"
 				src="https://img.freepik.com/free-vector/parking_24908-54061.jpg?size=626&ext=jpg&ga=GA1.1.1163619451.1684595486&semt=ais">
-		</div>
-		<a href="parkingInfo.jsp"><button type="button"
-				class="btn btn-primary button">Home</button></a> <a href="sign.jsp"><button
-				type="button" class="btn btn-primary button">LogOut</button></a>
+				</div>
+				<a href="userloginSuccess.jsp"><button type="button" class="btn btn-primary button">Home</button></a>
 
-	</nav>
+ 				</nav>
+				<div class="nav navbar-nav navbar-right">
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${userDto.userName}</p>
+  		</div>
+				<h3 align="center">User Information</h3>
+				
+				<div class="views">
+<table class="table table-border">
+	
+		<tr>
+			<th>userName</th>
+			<th>userEmail</th>
+			<th>userMobileNo</th>
+		</tr>
+	
+		<tr>
+			<td>${userDto.userName}</td>
+			<td>${userDto.userEmail}</td>
+			<td>${userDto.userMobileNo}</td>
+		</tr>
+</table>
 
-	<div align="center">
-		<span style="color: green;">${sucessMsg}</span>
+<table class="table table-border">
 
-		<h2>Submitted</h2>
+		<tr>
+			<th>Location</th>
+			<th>Vtype</th>
+			<th>Vclassification</th>
+			<th>Term</th>
+			<th>Price</th>
+			<th>Discount</th>
+			<th>Total Amount</th>
+			<th>Image</th>
+			<th>Action</th>
+		</tr>
+		
+	
+		<tr>
+			<td>${parkingid.location}</td>
+			<td>${parkingid.vtype}</td>
+			<td>${parkingid.vclassification}</td>
+			<td>${parkingid.term}</td>
+			<td>${parkingid.price}</td>
+			<td>${parkingid.discount}</td>
+			<td>${parkingid.totalAmount}</td>
+			<td><a target="_blank" href="fileDownload?fileName= ${parkingid.fileName}&contentType=${parkingid.contentType}">${parkingid.fileName}</a></td>
+			<td><a href="update/${parkingid.parkingId}">Update</a></td>
+		</tr>
 
-		Location:${dtos.location}<br> Vehicle Type:${dtos.vtype}<br>
-		Vehicle Classification :${dtos.vclassification}<br>
-		Terms:${dtos.term}<br> Price:${dtos.price}<br>
-		Discount:${dtos.discount}<br>
-
-	</div>
-	<footer>
+</table>
+</div>		
+				<footer>
 		<!-- <div class="footer-content">
 			<h4 class="">X-Workz(ODC)</h4>
 			<ul class="socials">
@@ -197,18 +235,12 @@ footer {
 		</div> -->
 		<div class="footer-bottom">
 
-			<div class="footer-bottom">
-
 			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
 		
-		</div>
-
 
 		</div>
 
 	</footer>
-
-
-
 </body>
+
 </html>

@@ -34,5 +34,11 @@ public class ParkingInfoEntity {
 	private int price;
 
 	private String discount;
+	
+	
+	
+	
+	
+	
 
 }

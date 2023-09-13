@@ -7,17 +7,16 @@ import com.xworkz.parkingapp.dto.ParkingDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class DefaultController {
 	
 	public DefaultController() {
-		log.info("inside default controller");
+		System.out.println("inside default controller");
 	}
 	@RequestMapping("/start")
 	public String onStart(Model model) {
-		log.info("onstart method started in default controller");
+		System.out.println("onstart method started in default controller");
 		model.addAttribute("dto",new ParkingDTO());
-		log.info("after model attribute");
+		System.out.println("after model attribute");
 		return "/home.jsp";
 	}
 	

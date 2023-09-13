@@ -196,9 +196,8 @@ footer {
 		</div> -->
 		<div class="footer-bottom">
 
-			<p>
-				copyright &copy; <a href="#"> Developer</a>
-			</p>
+			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
+		
 
 		</div>
 

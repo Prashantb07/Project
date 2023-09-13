@@ -204,16 +204,14 @@ footer {
 				<li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
 			</ul>
 		</div> -->
-		<div class="footer-bottom">
+		
+			<div class="footer-bottom">
 
-			<p>
-				
-				copyright &copy; <a href="#"> Developer</a> <p>last_login_time: ${dto.loginTime}</p>
-				
-			</p>
+			<small>@ 2023 Copyright &copy; xworkz.com:last_login_time: ${dto.loginTime}</small>
+			
 
 		</div>
-
+		
 	</footer>
 
 </body>
